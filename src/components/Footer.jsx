@@ -7,7 +7,7 @@ function Footer() {
   };
 
   const handleDownloadClick = () => {
-    window.open('https://mega.nz/file/EkwSBbYI#wcbT_mN9nB8l6AdRTqjcqXBDw7yQnH13wFclj2HaixY', '_blank');
+    window.open('', '_blank');
   };
 
   return (

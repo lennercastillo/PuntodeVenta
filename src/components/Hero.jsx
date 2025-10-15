@@ -25,7 +25,7 @@ function Hero() {
           
           <div className="hero-buttons">
             <a 
-              href="https://mega.nz/file/EkwSBbYI#wcbT_mN9nB8l6AdRTqjcqXBDw7yQnH13wFclj2HaixY" 
+              href="" 
               target="_blank" 
               rel="noopener noreferrer"
               className="btn btn-primary btn-hero"
