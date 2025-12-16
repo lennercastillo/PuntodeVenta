@@ -3,7 +3,7 @@ import { FaTimes, FaDownload, FaArrowLeft, FaStar, FaClock, FaBook } from 'react
 
 function Modal({ isOpen, onClose, helpItem }) {
   console.log('Modal props:', { isOpen, helpItem });
-  
+
   useEffect(() => {
     const handleEscape = (e) => {
       if (e.key === 'Escape') {
@@ -61,33 +61,77 @@ function Modal({ isOpen, onClose, helpItem }) {
       "6. Establece la moneda y zona horaria",
       "7. El sistema estará listo para usar"
     ],
-    "Gestión de Productos": [
-      "1. Ve al menú 'Inventario'",
-      "2. Selecciona 'Productos'",
-      "3. Para agregar: Click en 'Nuevo Producto'",
-      "4. Completa: código, nombre, precio, stock",
-      "5. Para editar: Selecciona el producto y click 'Editar'",
-      "6. Para eliminar: Selecciona y click 'Eliminar'",
-      "7. Guarda los cambios"
+    "Agregar nueva categoria": [
+      "1. Ve al menú 'Categorias'",
+      "2. Click en 'Nueva categoria'",
+      "3. Completa: 'Nombre' con el tipo de categoria",
+      "4. Guarda los cambios"
     ],
-    "Reportes del Sistema": [
-      "1. Ve al menú 'Reportes'",
-      "2. Selecciona el tipo de reporte",
-      "3. Configura el rango de fechas",
-      "4. Aplica filtros si es necesario",
-      "5. Genera el reporte",
-      "6. Exporta en PDF o Excel",
-      "7. Imprime si es necesario"
+    "Agregar nuevo cliente": [
+      "1. Ve al menú 'Clientes'",
+      "2. Click en 'Nuevo cliente'",
+      "3. Completa: 'Nombre', 'Telefono', 'Indentificacion', 'Telefono','Direccion'",
+      "4. Guarda los cambios"
     ],
-    "Configuración de Usuarios": [
-      "1. Ve a 'Configuración' > 'Usuarios'",
-      "2. Click en 'Nuevo Usuario'",
-      "3. Completa: nombre, usuario, contraseña",
-      "4. Asigna el rol (Admin, Vendedor, etc.)",
-      "5. Configura los permisos específicos",
-      "6. Guarda el usuario",
-      "7. El usuario puede iniciar sesión"
-    ]
+    "Agregar nuevo producto": [
+      "1. Ve al menú 'Productos'",
+      "2. Click en 'Nuevo producto'",
+      "3. Completa: 'Nombre', 'Codigo de barras', 'Precio', 'Existencia', 'Categoria', 'Descripcion', 'Imagen'",
+      "4. Guarda los cambios"
+    ],
+    "Agregar nuevo proveedor": [
+      "1. Ve al menú 'Proveedores'",
+      "2. Click en 'Nuevo'",
+      "3. Completa: 'Nombre', 'Indentificacion', 'Telefono','Domicilio'",
+      "4. Guarda los cambios"
+    ],
+    "Agregar nuevo usuario": [
+      "1. Ve al 'Administracion de usuarios'",
+      "2. Click en 'Nuevo'",
+      "3. Completa: nombres, apellidos, correo, usuario, contraseña, perfil",
+      "4. Guarda el usuario"
+    ],
+    "Consultar ganancias por producto": [
+      "1. Ve a 'Reportes'",
+      "2. El el menu de reportes selecciona 'Ganancias por producto'",
+    ],
+    "Consultar kardex": [
+      "1. Ve al 'Kardex de inventario'",
+      "2. Busca el producto que deseas consultar",
+    ],
+    "Realizar apertura de caja": [
+      "1. Ve a 'Caja'",
+      "2. Click en 'Apertura caja'",
+      "3. Ingresa el monto de apertura",
+      "4. Ingresa una nota de apertura",
+      "5. Guarda los cambios"
+    ],
+    "Realizar cierre de caja": [
+      "1. Ve a 'Caja'",
+      "2. Click en 'Cierre caja'",
+      "3. Ingresa el monto de cierre",
+      "4. Ingresa una nota de cierre",
+      "5. Guarda los cambios"
+    ],
+    "Realizar compra": [
+      "1. Ve a 'Nueva compra'",
+      "2. Click en 'Nueva compra'",
+      "3. Busca el producto",
+      "4. Ingresa el precio del producto",
+      "5. Ingresa la cantidad del producto",
+      "6. Ingresa el numero de factura",
+      "7. Ingresa el proveedor",
+      "8. Ingresa el monto total",
+      "9. Ingresa una nota de la compra",
+      "10. Guarda los cambios"
+    ],
+    "reimprimir factura": [
+      "1. Ve a 'Hist. Facturas'",
+      "2. Busca la factura que deseas reimprimir",
+      "3. Seleccione la factura",
+      "4. Click en 'Reimprimir factura'",
+    ],
+
   };
 
   const currentInstructions = instructions[helpItem.title] || [];
@@ -96,7 +140,7 @@ function Modal({ isOpen, onClose, helpItem }) {
     const easy = ["Inicio del Sistema", "Gestión de Productos"];
     const medium = ["Nueva Factura con Efectivo", "Reportes del Sistema"];
     const hard = ["Nueva Factura con Crédito", "Configuración de Usuarios"];
-    
+
     if (easy.includes(title)) return { level: "Fácil", color: "#10b981" };
     if (medium.includes(title)) return { level: "Intermedio", color: "#f59e0b" };
     if (hard.includes(title)) return { level: "Avanzado", color: "#ef4444" };
@@ -110,7 +154,12 @@ function Modal({ isOpen, onClose, helpItem }) {
       "Nueva Factura con Efectivo": "3-7 min",
       "Nueva Factura con Crédito": "5-10 min",
       "Reportes del Sistema": "3-8 min",
-      "Configuración de Usuarios": "5-15 min"
+      "Configuración de Usuarios": "5-15 min",
+      "Realizar reimprimir factura": "2-5 min",
+      "Realizar compra": "2-5 min",
+      "Realizar reimprimir compra": "2-5 min",
+
+
     };
     return times[title] || "5-10 min";
   };
@@ -119,7 +168,7 @@ function Modal({ isOpen, onClose, helpItem }) {
   const estimatedTime = getEstimatedTime(helpItem.title);
 
   return (
-    <div 
+    <div
       className={`modal-overlay ${isOpen ? 'active' : ''}`}
       onClick={onClose}
       style={{
@@ -136,7 +185,7 @@ function Modal({ isOpen, onClose, helpItem }) {
         transition: 'all 0.3s ease'
       }}
     >
-      <div 
+      <div
         className="modal-content"
         onClick={(e) => e.stopPropagation()}
         style={{
@@ -164,7 +213,7 @@ function Modal({ isOpen, onClose, helpItem }) {
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'flex-start',
-            gap: '1rem'
+            gap: '2rem'
           }}>
             <div className="modal-header-info" style={{ flex: 1 }}>
               <h3 className="modal-title" style={{
@@ -195,7 +244,7 @@ function Modal({ isOpen, onClose, helpItem }) {
                   <FaBook />
                   {helpItem.category}
                 </span>
-                <span className="modal-badge" style={{ 
+                <span className="modal-badge" style={{
                   display: 'inline-flex',
                   alignItems: 'center',
                   gap: '0.5rem',
@@ -225,7 +274,7 @@ function Modal({ isOpen, onClose, helpItem }) {
                 </span>
               </div>
             </div>
-            <button 
+            <button
               onClick={onClose}
               className="modal-close"
               style={{
@@ -256,7 +305,7 @@ function Modal({ isOpen, onClose, helpItem }) {
             </button>
           </div>
         </div>
-        
+
         {/* Body */}
         <div className="modal-body" style={{
           padding: '2rem',
@@ -268,19 +317,18 @@ function Modal({ isOpen, onClose, helpItem }) {
           <div className="modal-image-container" style={{
             width: '100%',
             maxWidth: '100%',
-            margin: '0 auto'
+            margin: 'auto'
           }}>
             <div className="modal-image-wrapper" style={{
               position: 'relative',
               width: '100%',
+              height: 'auto',
               maxWidth: '1200px',
-              margin: '0 auto',
-              borderRadius: '1rem',
-              overflow: 'hidden',
-              boxShadow: '0 10px 30px rgba(0, 0, 0, 0.2)'
+              margin: '0 auto'
+
             }}>
-              <img 
-                src={helpItem.gif} 
+              <img
+                src={helpItem.gif}
                 alt={helpItem.title}
                 className="modal-image"
                 style={{
@@ -293,7 +341,7 @@ function Modal({ isOpen, onClose, helpItem }) {
               />
             </div>
           </div>
-          
+
           {/* Description */}
           <div className="modal-description" style={{
             textAlign: 'center',
@@ -309,7 +357,7 @@ function Modal({ isOpen, onClose, helpItem }) {
               {helpItem.description}
             </p>
           </div>
-          
+
           {/* Instructions */}
           <div className="modal-instructions" style={{
             maxWidth: '800px',
@@ -369,7 +417,7 @@ function Modal({ isOpen, onClose, helpItem }) {
               ))}
             </ol>
           </div>
-          
+
           {/* Tags */}
           <div className="modal-tags" style={{
             maxWidth: '800px',
@@ -406,7 +454,7 @@ function Modal({ isOpen, onClose, helpItem }) {
             </div>
           </div>
         </div>
-        
+
         {/* Footer */}
         <div className="modal-footer" style={{
           padding: '2rem',
@@ -420,7 +468,7 @@ function Modal({ isOpen, onClose, helpItem }) {
           bottom: 0,
           zIndex: 10
         }}>
-          <button 
+          <button
             onClick={onClose}
             className="modal-btn modal-btn-secondary"
             style={{
@@ -452,9 +500,9 @@ function Modal({ isOpen, onClose, helpItem }) {
             <FaArrowLeft />
             Cerrar
           </button>
-          <a 
-            href="https://mega.nz/file/EkwSBbYI#wcbT_mN9nB8l6AdRTqjcqXBDw7yQnH13wFclj2HaixY" 
-            target="_blank" 
+          <a
+            href="https://mega.nz/file/EkwSBbYI#wcbT_mN9nB8l6AdRTqjcqXBDw7yQnH13wFclj2HaixY"
+            target="_blank"
             rel="noopener noreferrer"
             className="modal-btn modal-btn-primary"
             style={{
