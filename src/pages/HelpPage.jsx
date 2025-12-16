@@ -6,7 +6,7 @@ function HelpPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedHelpItem, setSelectedHelpItem] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  
+
   const helpItems = [
     {
       id: 1,
@@ -34,63 +34,120 @@ function HelpPage() {
     },
     {
       id: 4,
-      title: "Gestión de Productos",
-      description: "Agregar, editar y eliminar productos del inventario",
-      gif: "/assets/images/header-bg.jpg",
+      title: "Agregar nueva categoria",
+      description: "Agregar nueva categoria",
+      gif: "/assets/gifts/AgregarNuevaCategoriaFacilRapido.gif",
       category: "Inventario",
       tags: ["productos", "inventario", "gestión", "agregar producto", "editar producto", "eliminar producto", "como agregar", "stock", "mercancia"]
     },
     {
       id: 5,
-      title: "Reportes del Sistema",
-      description: "Generar y exportar reportes de inventario y ventas",
-      gif: "/assets/images/header-bg.jpg",
-      category: "Reportes",
-      tags: ["reportes", "exportar", "estadísticas", "como hacer reporte", "generar reporte", "ver ventas", "estadisticas ventas", "exportar datos"]
+      title: "Agregar nuevo cliente",
+      description: "Agregar nuevo cliente",
+      gif: "/assets/gifts/AgregarNuevoClienteFacilRapido.gif",
+      category: "Clientes",
+      tags: ["clientes", "agregar cliente", "como agregar cliente", "agregar nuevo cliente", "agregar cliente rapido", "agregar cliente facil"]
     },
     {
       id: 6,
-      title: "Configuración de Usuarios",
-      description: "Administrar usuarios y permisos del sistema",
-      gif: "/assets/images/header-bg.jpg",
-      category: "Administración",
-      tags: ["usuarios", "permisos", "admin", "como crear usuario", "agregar usuario", "configurar permisos", "administrar", "accesos"]
+      title: "Agregar nuevo producto",
+      description: "Agregar nuevo producto",
+      gif: "/assets/gifts/AgregarNuevoProductoFacilRapido.gif",
+      category: "Inventario",
+      tags: ["productos", "inventario", "gestión", "agregar producto", "editar producto", "eliminar producto", "como agregar", "stock", "mercancia"]
     },
     {
       id: 7,
-      title: "Realizar ajustes de inventario",
-      description: "Realizar ajustes de inventario para corregir errores o cambios en el stock",
-      gif: "/assets/images/header-bg.jpg",
-      category: "Administración",
-      tags: ["ajustes", "ajuste inventario", "ajuste por disminucion", "corregir stock", "ajustar stock", "ajustar inventario", "ajustar mercancia", "ajustar mercaderia"]
+      title: "Agregar nuevo proveedor",
+      description: "Agregar nuevo proveedor",
+      gif: "/assets/gifts/AgregarNuevoproveedorFacilRapido.gif",
+      category: "Proveedores",
+      tags: ["proveedores", "agregar proveedor", "como agregar proveedor", "agregar nuevo proveedor", "agregar proveedor rapido", "agregar proveedor facil"]
+    },
+    {
+      id: 8,
+      title: "Agregar nuevo usuario",
+      description: "Agregar nuevo usuario",
+      gif: "/assets/gifts/AgregarNuevoUsuarioFacilRapido.gif",
+      category: "Usuarios",
+      tags: ["usuarios", "agregar usuario", "como agregar usuario", "agregar nuevo usuario", "agregar usuario rapido", "agregar usuario facil"]
+    },
+
+    {
+      id: 9,
+      title: "Consultar ganancias por producto",
+      description: "Consultar ganancias por producto",
+      gif: "/assets/gifts/ConsultarGananciasXproductoFacilRapido.gif",
+      category: "Inventario",
+      tags: ["usuarios", "consultar ganancias", "como consultar ganancias", "consultar ganancias por producto", "consultar ganancias rapido", "consultar ganancias facil"]
+    },
+    {
+      id: 10,
+      title: "Consultar Kardex",
+      description: "Consultar Kardex",
+      gif: "/assets/gifts/ConsultarKardexFacilRapido.gif",
+      category: "Inventario",
+      tags: ["inventario", "consultar kardex", "como consultar kardex", "consultar kardex por producto", "consultar kardex rapido", "consultar kardex facil"]
+    },
+    {
+      id: 11,
+      title: "Realizar apertura de caja",
+      description: "Realizar apertura de caja",
+      gif: "/assets/gifts/RealizarAperturaCajaFacilRapido.gif",
+      category: "Caja",
+      tags: ["caja", "apertura de caja", "como realizar apertura de caja", "apertura de caja rapido", "apertura de caja facil"]
+    },
+    {
+      id: 12,
+      title: "Realizar cierre de caja",
+      description: "Realizar cierre de caja",
+      gif: "/assets/gifts/RealizarCierreCajaFacilRapido.gif",
+      category: "Caja",
+      tags: ["caja", "cierre de caja", "como realizar cierre de caja", "cierre de caja rapido", "cierre de caja facil"]
+    },
+    {
+      id: 13,
+      title: "Realizar compra",
+      description: "Realizar compra",
+      gif: "/assets/gifts/RealizarCompraFacilRapido.gif",
+      category: "Compras",
+      tags: ["compras", "compra", "como realizar compra", "compra rapido", "compra facil"]
+    },
+    {
+      id: 14,
+      title: "reimprimir factura",
+      description: "Reimprimir factura",
+      gif: "/assets/gifts/ReimprimirFacturaFacilRapido.gif",
+      category: "Facturación",
+      tags: ["facturación", "reimprimir factura", "como reimprimir factura", "reimprimir factura rapido", "reimprimir factura facil"]
     }
 
   ];
 
   const filteredItems = helpItems.filter(item => {
     if (!searchTerm.trim()) return true;
-    
+
     const searchLower = searchTerm.toLowerCase().trim();
     const searchWords = searchLower.split(/\s+/); // Dividir en palabras individuales
-    
+
     // Función para verificar si alguna palabra de búsqueda coincide
     const matchesSearch = (text) => {
       const textLower = text.toLowerCase();
       return searchWords.some(word => textLower.includes(word));
     };
-    
+
     // Buscar en título, descripción, categoría y tags
     const titleMatch = matchesSearch(item.title);
     const descriptionMatch = matchesSearch(item.description);
     const categoryMatch = matchesSearch(item.category);
     const tagsMatch = item.tags.some(tag => matchesSearch(tag));
-    
+
     // También buscar coincidencias exactas de frases completas
     const exactMatch = item.title.toLowerCase().includes(searchLower) ||
-                      item.description.toLowerCase().includes(searchLower) ||
-                      item.category.toLowerCase().includes(searchLower) ||
-                      item.tags.some(tag => tag.toLowerCase().includes(searchLower));
-    
+      item.description.toLowerCase().includes(searchLower) ||
+      item.category.toLowerCase().includes(searchLower) ||
+      item.tags.some(tag => tag.toLowerCase().includes(searchLower));
+
     return titleMatch || descriptionMatch || categoryMatch || tagsMatch || exactMatch;
   });
 
@@ -113,12 +170,12 @@ function HelpPage() {
     <div className="help-page">
       {/* Debug info */}
       <div style={{
-        
+
       }}>
         {/*<div>Modal Open: {isModalOpen ? '✅' : '❌'}</div>
         <div>Selected Item: {selectedHelpItem ? selectedHelpItem.title : 'None'}</div>*/}
-      </div> 
-      
+      </div>
+
       <div className="container">
         <div className="help-header">
           <h1>Centro de Ayuda</h1>
@@ -126,8 +183,8 @@ function HelpPage() {
           <Link to="/" className="back-link">
             ← Volver al Inicio
           </Link>
-          
-         
+
+
         </div>
 
         <div className="search-section">
@@ -143,37 +200,37 @@ function HelpPage() {
               🔍
             </button>
           </div>
-          
+
           {/* Sugerencias de búsqueda populares */}
           {!searchTerm.trim() && (
             <div className="search-suggestions">
               <p className="suggestions-title">Búsquedas populares:</p>
               <div className="suggestion-tags">
-                <button 
+                <button
                   className="suggestion-tag"
                   onClick={() => setSearchTerm("como hacer factura")}
                 >
                   ¿Cómo hacer una factura?
                 </button>
-                <button 
+                <button
                   className="suggestion-tag"
                   onClick={() => setSearchTerm("agregar producto")}
                 >
                   ¿Cómo agregar productos?
                 </button>
-                <button 
+                <button
                   className="suggestion-tag"
                   onClick={() => setSearchTerm("ver reportes")}
                 >
                   ¿Cómo ver reportes?
                 </button>
-                <button 
+                <button
                   className="suggestion-tag"
                   onClick={() => setSearchTerm("como empezar")}
                 >
                   ¿Cómo empezar a usar?
                 </button>
-                <button 
+                <button
                   className="suggestion-tag"
                   onClick={() => setSearchTerm("crear usuario")}
                 >
@@ -209,7 +266,7 @@ function HelpPage() {
           {filteredItems.length === 0 ? (
             <div className="no-results">
               <p>No se encontraron resultados para "{searchTerm}"</p>
-              <button 
+              <button
                 className="btn btn-secondary"
                 onClick={() => setSearchTerm('')}
               >
@@ -249,14 +306,14 @@ function HelpPage() {
             <a href="mailto:soporte@sistemainventario.com" className="btn btn-primary">
               Contactar Soporte
             </a>
-            <a href="tel:+15551234567" className="btn btn-secondary">
+            <a href="tel:+505 87662727" className="btn btn-secondary">
               Llamar Ahora
             </a>
           </div>
         </div>
       </div>
 
-      <Modal 
+      <Modal
         isOpen={isModalOpen}
         onClose={closeModal}
         helpItem={selectedHelpItem}
